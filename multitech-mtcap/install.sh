@@ -73,7 +73,7 @@ echo "lora-gateway-bridge configured"
 echo "lora-packet-forwarder configuring ..."
 
 cd /var/config/lora/
-wget $REPO/multitech-mtcap/lora-packet-forwarder/local_conf.json
+wget $REPO/multitech-mtcap/lora-packet-forwarder/local_conf.json -O local_conf.json
 
 /etc/init.d/lora-packet-forwarder stop
 /etc/init.d/lora-packet-forwarder start
