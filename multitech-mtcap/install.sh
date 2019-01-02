@@ -15,6 +15,9 @@ fi
 MQTT_USERNAME=$1
 MQTT_PASSWORD=$2
 
+# The gain of the onboard antenna of the MTCAP is 2 dBi
+ANTENNA_GAIN_DBI=2
+
 REPO=https://raw.githubusercontent.com/CampusIoT/gateway-config/master
 
 # Display mLinux version
@@ -79,6 +82,7 @@ update-rc.d lora-packet-forwarder defaults
 /etc/init.d/lora-packet-forwarder stop
 cd /var/config/lora/
 wget $REPO/multitech-mtcap/lora-packet-forwarder/local_conf.json -O local_conf.json
+sed -i.bak s/__ANTENNA_GAIN_DBI__/$ANTENNA_GAIN_DBI/g local_conf.json
 /etc/init.d/lora-packet-forwarder start
 
 echo "lora-packet-forwarder configured"
