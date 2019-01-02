@@ -3,6 +3,8 @@
 # Copyright (C) CampusIoT,  - All Rights Reserved
 # Written by CampusIoT Dev Team, 2016-2018
 
+# Documentation : https://www.loraserver.io/lora-gateway-bridge/install/gateway/multitech/
+
 # Check the number of parameters
 
 if [ "$#" -ne 2 ]; then
@@ -70,7 +72,12 @@ update-rc.d lora-gateway-bridge defaults
 echo "lora-gateway-bridge configured"
 
 # Install lora-packet-forwarder if not install by default
-# TODO
+
+# wget https://artifacts.loraserver.io/vendor/multitech/conduit/lora-packet-forwarder_4.0.1-r5.0_mtcdt.ipk
+# opkg install lora-packet-forwarder_4.0.1-r5.0_mtcdt.ipk
+# opkg flag hold lora-packet-forwarder
+# /etc/init.d/lora-packet-forwarder-ap1 start
+# update-rc.d lora-packet-forwarder-ap1 defaults
 
 # Configure lora-packet-forwarder
 echo "lora-packet-forwarder configuring ..."

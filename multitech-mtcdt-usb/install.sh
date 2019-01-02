@@ -3,6 +3,8 @@
 # Copyright (C) CampusIoT,  - All Rights Reserved
 # Written by CampusIoT Dev Team, 2016-2018
 
+# Documentation : https://www.loraserver.io/lora-gateway-bridge/install/gateway/multitech/
+
 # Check the number of parameters
 
 if [ "$#" -ne 3 ]; then
@@ -70,20 +72,26 @@ update-rc.d lora-gateway-bridge defaults
 echo "lora-gateway-bridge configured"
 
 # Install lora-packet-forwarder if not install by default
-# TODO
 
-# Configure lora-packet-forwarder
-echo "lora-packet-forwarder configuring ..."
+# wget https://artifacts.loraserver.io/vendor/multitech/conduit/lora-packet-forwarder-usb_1.4.1-r2.0_arm926ejste.ipk
+# opkg install lora-packet-forwarder-usb_1.4.1-r2.0_arm926ejste.ipk
+# opkg flag hold lora-packet-forwarder-usb
+# /etc/init.d/lora-packet-forwarder-usb start
+# update-rc.d lora-packet-forwarder-usb defaults
 
-/etc/init.d/lora-packet-forwarder stop
-/etc/init.d/lora-packet-forwarder start
-update-rc.d lora-packet-forwarder defaults
 
-/etc/init.d/lora-packet-forwarder stop
+# Configure lora-packet-forwarder-usb
+echo "lora-packet-forwarder-usb configuring ..."
+
+/etc/init.d/lora-packet-forwarder-usb stop
+/etc/init.d/lora-packet-forwarder-usb start
+update-rc.d lora-packet-forwarder-usb defaults
+
+/etc/init.d/lora-packet-forwarder-usb stop
 cd /var/config/lora/
 wget $REPO/multitech-mtcdt-usb/lora-packet-forwarder/local_conf.json -O local_conf.json
 sed -i.bak s/__ANTENNA_GAIN_DBI__/$ANTENNA_GAIN_DBI/g local_conf.json
-/etc/init.d/lora-packet-forwarder start
+/etc/init.d/lora-packet-forwarder-usb start
 
 echo "lora-packet-forwarder configured"
 
