@@ -1,0 +1,11 @@
+{
+  "SX1301_conf": {
+      "antenna_gain": __ANTENNA_GAIN_DBI__, /* antenna gain in dBi */
+  },
+
+  "gateway_conf": {
+        "server_address": "localhost",
+        "serv_port_up": 1700,
+        "serv_port_down": 1700
+  }
+}
