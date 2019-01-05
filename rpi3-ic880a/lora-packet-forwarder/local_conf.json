@@ -1,0 +1,12 @@
+{
+  "SX1301_conf": {
+      "antenna_gain": __ANTENNA_GAIN_DBI__, /* antenna gain in dBi */
+  },
+
+  "gateway_conf": {
+        "gateway_ID": "GWEUI",
+        "server_address": "127.0.0.1",
+        "serv_port_up": 1700,
+        "serv_port_down": 1700
+  }
+}
