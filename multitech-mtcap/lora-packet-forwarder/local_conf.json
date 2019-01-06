@@ -1,6 +1,6 @@
 {
   "SX1301_conf": {
-      "antenna_gain": __ANTENNA_GAIN_DBI__, /* antenna gain in dBi */
+      "antenna_gain": __ANTENNA_GAIN_DBI__ /* antenna gain in dBi */
   },
 
   "gateway_conf": {
