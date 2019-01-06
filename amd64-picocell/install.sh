@@ -79,22 +79,21 @@ echo "picoGW_packet_forwarder built"
 # Install lora-packet-forwarder
 echo "lora-packet-forwarder installing ..."
 
-mkdir -p /opt/lora-packet-forwarder
+sudo mkdir -p /opt/lora-packet-forwarder
 cd /opt/lora-packet-forwarder
-cp /tmp/Lora-net/picoGW_packet_forwarder/lora_pkt_fwd/lora_pkt_fwd .
-cp /tmp/Lora-net/picoGW_packet_forwarder/lora_pkt_fwd/cfg/global_conf_PicoV1p0_EU.json ./global_conf.LOCALHOST.json
+sudo cp /tmp/Lora-net/picoGW_packet_forwarder/lora_pkt_fwd/lora_pkt_fwd .
+sudo cp /tmp/Lora-net/picoGW_packet_forwarder/lora_pkt_fwd/cfg/global_conf_PicoV1p0_EU.json ./global_conf.LOCALHOST.json
 
-wget $REPO/amd64-picocell/lora-packet-forwarder/local_conf.json -O local_conf.LOCALHOST.json
-sed -i.bak s/__ANTENNA_GAIN_DBI__/$ANTENNA_GAIN_DBI/g local_conf.LOCALHOST.json
+sudo wget $REPO/amd64-picocell/lora-packet-forwarder/local_conf.json -O local_conf.LOCALHOST.json
+sudo sed -i.bak s/__ANTENNA_GAIN_DBI__/$ANTENNA_GAIN_DBI/g local_conf.LOCALHOST.json
 
-wget $REPO/amd64-picocell/lora-packet-forwarder/start.sh -O start.sh
-wget $REPO/amd64-picocell/lora-packet-forwarder/stop.sh -O stop.sh
-wget $REPO/amd64-picocell/lora-packet-forwarder/reset_lgw.sh -O reset_lgw.sh
-chmod +x *.sh
+sudo wget $REPO/amd64-picocell/lora-packet-forwarder/start.sh -O start.sh
+sudo wget $REPO/amd64-picocell/lora-packet-forwarder/stop.sh -O stop.sh
+sudo chmod +x *.sh
 
 sudo apt update
 sudo apt install monit -y
-wget $REPO/amd64-picocell/lora-packet-forwarder/monitrc -O monitrc
+sudo wget $REPO/amd64-picocell/lora-packet-forwarder/monitrc -O monitrc
 sudo cp monitrc /etc/monit/
 sudo monit reload
 

@@ -7,5 +7,5 @@
   set statefile /var/lib/monit/state
 
   check process lora-packet-forwarder with pidfile /opt/lora-packet-forwarder/pid.txt
-    start program = "/bin/su -c "/opt/lora-packet-forwarder/start.sh" pi"
-    stop program = "/bin/su -c "/opt/lora-packet-forwarder/stop.sh" pi"
+    start program = "/bin/su -c "/opt/lora-packet-forwarder/start.sh" root"
+    stop program = "/bin/su -c "/opt/lora-packet-forwarder/stop.sh" root"
