@@ -1,0 +1,11 @@
+# Copyright (C) CampusIoT,  - All Rights Reserved
+# Written by CampusIoT Dev Team, 2016-2018
+
+  set daemon 60  # check services at 1-minute intervals
+  set logfile /var/log/monit.log
+  set idfile /var/lib/monit/id
+  set statefile /var/lib/monit/state
+
+  check process lora-packet-forwarder with pidfile /opt/lora-packet-forwarder/pid.txt
+    start program = "/bin/su -c "/opt/lora-packet-forwarder/start.sh" pi"
+    stop program = "/bin/su -c "/opt/lora-packet-forwarder/stop.sh" pi"
