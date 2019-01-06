@@ -50,9 +50,9 @@ echo "lora-gateway-bridge configuring ..."
 cd /tmp
 wget $REPO/lora-gateway-bridge/ca.crt -O ca.crt
 wget $REPO/lora-gateway-bridge/lora-gateway-bridge.toml -O lora-gateway-bridge.toml
-sed -i.bak s/__MQTT_USERNAME__/$MQTT_USERNAME/g lora-gateway-bridge.toml
-sed -i.bak s/__MQTT_PASSWORD__/$MQTT_PASSWORD/g lora-gateway-bridge.toml
-sed -i.bak s/var\/config/etc/g lora-gateway-bridge.toml
+sed -i.bak "s/__MQTT_USERNAME__/$MQTT_USERNAME/g" lora-gateway-bridge.toml
+sed -i.bak "s/__MQTT_PASSWORD__/$MQTT_PASSWORD/g" lora-gateway-bridge.toml
+sed -i.bak "s/var\/config/etc/g" lora-gateway-bridge.toml
 
 sudo -u gatewaybridge cp ca.crt /etc/lora-gateway-bridge/ca.crt
 sudo -u gatewaybridge cp lora-gateway-bridge.toml /etc/lora-gateway-bridge/lora-gateway-bridge.toml
@@ -69,10 +69,10 @@ echo "lora_pkt_fwd building ..."
 mkdir -p  Lora-net
 cd Lora-net
 git clone https://github.com/Lora-net/lora_gateway.git
-(cd lora_gateway; make clean; make)
+(cd lora_gateway; git reset --hard v4.0.0; make clean; make)
 
 git clone https://github.com/Lora-net/packet_forwarder.git
-(cd packet_forwarder; make clean; make)
+(cd packet_forwarder; git reset --hard v3.0.0; make clean; make)
 
 echo "lora_pkt_fwd built"
 
@@ -80,16 +80,17 @@ echo "lora_pkt_fwd built"
 echo "lora-packet-forwarder installing ..."
 
 mkdir -p /opt/lora-packet-forwarder
-cp packet_forwarder/lora_pkt_fwd/lora_pkt_fwd /opt/lora-packet-forwarder
-cp packet_forwarder/lora_pkt_fwd/cfg/global_conf.json.PCB_E286.EU868.basic /opt/lora-packet-forwarder/global_conf.LOCALHOST.json
-
 cd /opt/lora-packet-forwarder
+cp /tmp/Lora-net/packet_forwarder/lora_pkt_fwd/lora_pkt_fwd .
+cp /tmp/Lora-net/packet_forwarder/lora_pkt_fwd/cfg/global_conf.json.PCB_E286.EU868.basic ./global_conf.LOCALHOST.json
+
 wget $REPO/rpi3-ic880a/lora-packet-forwarder/local_conf.json -O local_conf.LOCALHOST.json
-sed -i.bak s/__ANTENNA_GAIN_DBI__/$ANTENNA_GAIN_DBI/g local_conf.LOCALHOST.json
+# sed -i.bak s/__ANTENNA_GAIN_DBI__/$ANTENNA_GAIN_DBI/g local_conf.LOCALHOST.json
+echo "Warning: ANTENNA_GAIN_DBI is not setted into local_conf.json"
 
 wget $REPO/rpi3-ic880a/lora-packet-forwarder/start.sh -O start.sh
-wget $REPO/rpi3-ic880a/lora-packet-forwarder/start.sh -O stop.sh
-wget $REPO/rpi3-ic880a/lora-packet-forwarder/start.sh -O reset_lgw.sh
+wget $REPO/rpi3-ic880a/lora-packet-forwarder/stop.sh -O stop.sh
+wget $REPO/rpi3-ic880a/lora-packet-forwarder/reset_lgw.sh -O reset_lgw.sh
 chmod +x *.sh
 
 sudo apt install monit -y
