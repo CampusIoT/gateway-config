@@ -76,16 +76,16 @@ git clone https://github.com/Lora-net/packet_forwarder.git
 
 echo "lora_pkt_fwd built"
 
-# Install lora_pkt_fwd if not install by default
-echo "lora_pkt_fwd installing ..."
+# Install lora-packet-forwarder
+echo "lora-packet-forwarder installing ..."
 
 mkdir -p /opt/lora-packet-forwarder
-cp packet_forwarder/lora_pkt_fwd /opt/lora-packet-forwarder
-cp packet_forwarder/lora_pkt_fwd/cfg/global_conf.json.PCB_E286.EU868.basic /opt/lora-packet-forwarder/global_conf.json
+cp packet_forwarder/lora_pkt_fwd/lora_pkt_fwd /opt/lora-packet-forwarder
+cp packet_forwarder/lora_pkt_fwd/cfg/global_conf.json.PCB_E286.EU868.basic /opt/lora-packet-forwarder/global_conf.LOCALHOST.json
 
 cd /opt/lora-packet-forwarder
-wget $REPO/rpi3-ic880a/lora-packet-forwarder/local_conf.json -O local_conf.json
-sed -i.bak s/__ANTENNA_GAIN_DBI__/$ANTENNA_GAIN_DBI/g local_conf.json
+wget $REPO/rpi3-ic880a/lora-packet-forwarder/local_conf.json -O local_conf.LOCALHOST.json
+sed -i.bak s/__ANTENNA_GAIN_DBI__/$ANTENNA_GAIN_DBI/g local_conf.LOCALHOST.json
 
 wget $REPO/rpi3-ic880a/lora-packet-forwarder/start.sh -O start.sh
 wget $REPO/rpi3-ic880a/lora-packet-forwarder/start.sh -O stop.sh
@@ -97,7 +97,7 @@ wget $REPO/rpi3-ic880a/lora-packet-forwarder/monitrc -O monitrc
 sudo cp monitrc /etc/monit/
 sudo monit reload
 
-echo "lora_pkt_fwd installed"
+echo "lora-packet-forwarder installed"
 
 # End
 
