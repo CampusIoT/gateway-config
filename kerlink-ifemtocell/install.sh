@@ -47,15 +47,15 @@ echo "lora-gateway-bridge installed"
 
 echo "lora-gateway-bridge configuring ..."
 
-REPO=https://github.com/CampusIoT/gateway-config/tree/master/kerlink-ifemtocell
+REPO=https://raw.githubusercontent.com/CampusIoT/gateway-config/master/kerlink-ifemtocell
 cd /user/lora-gateway-bridge
 wget $REPO/lora-gateway-bridge/ca.crt -O ca.crt
 wget $REPO/lora-gateway-bridge/start.sh -O start.sh
-wget $REPO/lora-gateway-bridge/manifest.xml -O manifest.xml
+wget $REPO/lora-gateway-bridge/cron.sh -O cron.sh
 wget $REPO/lora-gateway-bridge/lora-gateway-bridge.toml -O lora-gateway-bridge.toml
 sed -i s/__MQTT_USERNAME__/$MQTT_USERNAME/g lora-gateway-bridge.toml
 sed -i s/__MQTT_PASSWORD__/$MQTT_PASSWORD/g lora-gateway-bridge.toml
-
+chmod +x *.sh
 
 echo "lora-gateway-bridge configured"
 

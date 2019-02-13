@@ -132,7 +132,7 @@ marshaler="v2_json"
     # Use this when setting up a secure connection (when server uses ssl://...)
     # but the certificate used by the server is not trusted by any CA certificate
     # on the server (e.g. when self generated).
-    ca_cert="/mnt/fsuser-1/lora-gateway-bridge/ca.crt"
+    ca_cert="/user/lora-gateway-bridge/ca.crt"
 
     # mqtt TLS certificate file (optional)
     #tls_cert=""

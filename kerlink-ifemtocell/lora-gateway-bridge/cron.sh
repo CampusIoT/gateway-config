@@ -5,12 +5,12 @@
 
 # Add the following line with 'crontab -e'
 
-# */2 * * * *  /mnt/fsuser-1/lora-gateway-bridge/cron.sh
+# */2 * * * *  /user/lora-gateway-bridge/cron.sh
 
 if /usr/bin/pgrep  "lora-gateway-bridge" > /dev/null
 then
     echo "lora-gateway-bridge is running"
 else
     echo "lora-gateway-bridge is stopped. starting it ..."
-    /mnt/fsuser-1/lora-gateway-bridge/start.sh
+    /user/lora-gateway-bridge/start.sh
 fi
