@@ -49,35 +49,31 @@ REPO=https://raw.githubusercontent.com/CampusIoT/gateway-config/master/kerlink-i
 cd /user/lora-gateway-bridge
 wget $REPO/lora-gateway-bridge/ca.crt -O ca.crt
 wget $REPO/lora-gateway-bridge/start.sh -O start.sh
-wget $REPO/lora-gateway-bridge/cron.sh -O cron.sh
 wget $REPO/lora-gateway-bridge/lora-gateway-bridge.monitrc -O lora-gateway-bridge.monitrc
-#cp lora-gateway-bridge.monitrc /etc/monit.d/
+cp lora-gateway-bridge.monitrc /etc/monit.d/
 wget $REPO/lora-gateway-bridge/lora-gateway-bridge.toml -O lora-gateway-bridge.toml
 sed -i s/__MQTT_USERNAME__/$MQTT_USERNAME/g lora-gateway-bridge.toml
 sed -i s/__MQTT_PASSWORD__/$MQTT_PASSWORD/g lora-gateway-bridge.toml
 chmod +x *.sh
+monit reload
+sleep 1
+monit status lora-gateway-bridge
 
 echo "lora-gateway-bridge configured"
 
 # Install lora-packet-forwarder if not install by default
-# TODO
 
 # Configure lora-packet-forwarder
 echo "lora-packet-forwarder configuring ..."
 
 cd /user/spf/etc
-wget $REPO/multitech-mtcap/lora-packet-forwarder/local_conf.json -O local_conf.json
-cp
+wget $REPO/lora-packet-forwarder/local_conf.json -O local_conf.json
 sed -i s/__GWEUI__/$MQTT_PASSWORD/g local_conf.json
 sed -i s/__GWEUI__/$MQTT_PASSWORD/g local_conf.json
 sed -i s/__ANTENNA_GAIN_DBI__/$ANTENNA_GAIN_DBI/g local_conf.json
-
+sleep 1
+monit status spf
 
 echo "lora-packet-forwarder configured"
 
 # End
-
-# TODO check if lora-gateway-bridge is running
-ps ax | grep lora-gateway-bridge
-# TODO check if lora-packet-forwarder is running
-pgrep lora_pkt_fwd
