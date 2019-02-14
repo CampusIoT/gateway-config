@@ -16,8 +16,6 @@ MQTT_USERNAME=$1
 MQTT_PASSWORD=$2
 ANTENNA_GAIN_DBI=$3
 
-REPO=https://raw.githubusercontent.com/CampusIoT/gateway-config/master
-
 # check if MQTT_USERNAME == gw-<LoRaNode EUI>
 EXPECTED_USERNAME=gw-$(echo "$lora_eui_raw" | tr '[:upper:]' '[:lower:]')
 if [ "$MQTT_USERNAME" = "$EXPECTED_USERNAME" ]; then
@@ -52,6 +50,8 @@ cd /user/lora-gateway-bridge
 wget $REPO/lora-gateway-bridge/ca.crt -O ca.crt
 wget $REPO/lora-gateway-bridge/start.sh -O start.sh
 wget $REPO/lora-gateway-bridge/cron.sh -O cron.sh
+wget $REPO/lora-gateway-bridge/lora-gateway-bridge.monitrc -O lora-gateway-bridge.monitrc
+#cp lora-gateway-bridge.monitrc /etc/monit.d/
 wget $REPO/lora-gateway-bridge/lora-gateway-bridge.toml -O lora-gateway-bridge.toml
 sed -i s/__MQTT_USERNAME__/$MQTT_USERNAME/g lora-gateway-bridge.toml
 sed -i s/__MQTT_PASSWORD__/$MQTT_PASSWORD/g lora-gateway-bridge.toml
