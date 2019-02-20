@@ -96,7 +96,22 @@ echo "lora-packet-forwarder configured"
 
 # End
 
-# TODO check if lora-gateway-bridge is running
-ps ax | grep lora-gateway-bridge
-# TODO check if lora-packet-forwarder is running
-pgrep lora_pkt_fwd
+# check if lora-gateway-bridge is running
+if (ps ax | grep lora-gateway-bridge > /dev/null)
+then
+  echo "lora-gateway-bridge is running : OK"
+else
+  echo "lora-gateway-bridge is not running. rebooting the gateway ..."
+  echo "check that lora-gateway-bridge and lora_pkt_fwd are running after the reboot"
+  reboot
+fi
+
+# check if lora-packet-forwarder is running
+if (pgrep lora_pkt_fwd > /dev/null)
+then
+  echo "lora_pkt_fwd is running : OK"
+else
+  echo "lora_pkt_fwd is not running. rebooting the gateway ..."
+  echo "check that lora-gateway-bridge and lora_pkt_fwd are running after the reboot"
+  reboot
+fi
