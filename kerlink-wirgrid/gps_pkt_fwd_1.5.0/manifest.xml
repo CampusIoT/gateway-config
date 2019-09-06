@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<manifest>
+<app name="forwarder" appid="22" binary="start_forwarder.sh">
+<start autostart="y" />
+<stop kill="5" />
+</app>
+</manifest>

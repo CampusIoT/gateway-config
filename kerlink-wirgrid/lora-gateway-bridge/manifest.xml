@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<manifest>
+  <app name="lora-gateway-bridge" binary="./start.sh" >
+    <start autostart="y"/>
+    <stop kill="9"/>
+  </app>
+</manifest>

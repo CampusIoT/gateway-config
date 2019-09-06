@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<manifest>
+	<app name="gps_pkt_fwd" binary="start.sh" >
+		<start autostart="y" />
+		<stop kill="3" />
+	</app>
+</manifest>
